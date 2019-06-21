@@ -1,0 +1,35 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+  
+.example-container > * {
+  width: 100%;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.title-center {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.painel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.painel > * {
+  margin: 10px;
+}
