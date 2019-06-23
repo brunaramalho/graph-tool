@@ -16,6 +16,12 @@
       <mat-radio-button value="2">Bloco</mat-radio-button>
     </mat-radio-group>
   </div>
+  <div [hidden]="algoritmo.value==2">
+    <mat-radio-group>
+      <mat-radio-button value="1" style="margin:10px">Lista</mat-radio-button>
+      <mat-radio-button value="2">Matriz</mat-radio-button>
+    </mat-radio-group>
+  </div>
 
   <div [hidden]="algoritmo.value==1">
     <form class="example-container" [formGroup]="options">
@@ -25,7 +31,6 @@
       </mat-form-field>
     </form>
   </div>
-
   <div [hidden]="algoritmo.value==1">
     <mat-radio-group>
       <mat-radio-button value="1" style="margin:10px">Estático</mat-radio-button>
