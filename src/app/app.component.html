@@ -13,7 +13,7 @@
   <div [hidden]="algoritmo.value==2">
     <mat-radio-group>
       <mat-radio-button value="1" style="margin:10px">Cordal</mat-radio-button>
-      <mat-radio-button value="2">Bloco</mat-radio-button>
+      <mat-radio-button value="2" style="margin-right: 50px">Bloco</mat-radio-button>
     </mat-radio-group>
   </div>
   <div [hidden]="algoritmo.value==2">
@@ -26,8 +26,8 @@
   <div [hidden]="algoritmo.value==1">
     <form class="example-container" [formGroup]="options">
       <mat-form-field>
-        <input matInput type="number" placeholder="Número de vértices" formControlName="n" min="1" max="30">
-        <mat-error *ngIf="options.get('n')?.invalid">Valor deve ser de 1 a 30</mat-error>
+        <input matInput type="number" placeholder="Número de vértices" formControlName="n" min="1">
+        <mat-error *ngIf="options.get('n')?.invalid">Valor deve ser maior que 1</mat-error>
       </mat-form-field>
     </form>
   </div>
@@ -40,7 +40,7 @@
 </div>
 
 <div class="painel">
-  <button mat-raised-button>Go</button>
+  <button mat-raised-button (click)="openDialog()">Go</button>
 </div>
 
 <form class="painel">

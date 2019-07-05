@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { AppComponent, ReconhecimentoDialog } from './app.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonToggleModule} from '@angular/material';
@@ -11,10 +11,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ReconhecimentoDialog
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatFormFieldModule,
     FormsModule, ReactiveFormsModule,
     MatInputModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    ReconhecimentoDialog
   ],
   providers: [],
   bootstrap: [AppComponent]
