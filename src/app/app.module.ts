@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent, ReconhecimentoDialog } from './app.component';
 
@@ -12,6 +12,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
+
+import { AppService } from './rest.service'
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -28,12 +31,14 @@ import {MatDialogModule} from '@angular/material/dialog';
     FormsModule, ReactiveFormsModule,
     MatInputModule,
     MatToolbarModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpModule
   ],
   entryComponents: [
     ReconhecimentoDialog
   ],
-  providers: [],
+  providers: [AppService],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
