@@ -4,48 +4,120 @@ import {MatDialog} from '@angular/material/dialog';
 import { AppService } from './rest.service'
 
 @Component({
+  selector: 'reconhecimento',
+  templateUrl: 'reconhecimento.html',
+})
+export class PertenceCordalDialog {
+  message: String = "É Cordal!"
+}
+
+@Component({
+  selector: 'reconhecimento',
+  templateUrl: 'reconhecimento.html',
+})
+export class NaoPertenceCordalDialog {
+  message: String = "Não é Cordal!"
+}
+
+@Component({
+  selector: 'reconhecimento',
+  templateUrl: 'reconhecimento.html',
+})
+export class PertenceBlocoDialog {
+  message: String = "É Bloco!"
+}
+
+@Component({
+  selector: 'reconhecimento',
+  templateUrl: 'reconhecimento.html',
+})
+export class NaoPertenceBlocoDialog {
+  message: String = "Não é Bloco!"
+}
+
+@Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   options: FormGroup;
+  classForm: FormGroup;
+  representationForm: FormGroup;
+  typeForm: FormGroup;
 
   constructor(fb: FormBuilder, public dialog: MatDialog, private service: AppService) {
     this.options = fb.group({
       n: [3, Validators.min(1)],
     });
+
+    this.classForm = fb.group({
+      default: ['1']
+    })
+
+    this.representationForm = fb.group({
+      default: ['1']
+    })
+
+    this.typeForm = fb.group({
+      default: ['1']
+    })
   }
 
-  postStatic(n) {
-     this.service.postStatic(n).subscribe(
-       data => { console.log(data)},
+  postStatic(n, listaInput, matrizInput) {
+    var matrix = "";
+    var list = ""; 
+    this.service.postStatic(n).subscribe(
+       data => { 
+          console.log(data);
+          list = data["output"].split("|")[0];
+          matrix = data["output"].split("|")[1];
+          listaInput.value = list
+          matrizInput.value = matrix
+        },
        error => { console.log(error);},
-       ()=> console.log("finished.. do something here")// Here call is completed. If you wish to do something 
-       // after call is completed(since this is an asynchronous call), this is the right place to do. ex: call another function
      )
    }
 
    postBlock(adjList) {
     this.service.postBlock(adjList).subscribe(
-      data => { console.log(data)},
+      data => { 
+        console.log(data);
+        this.openDialog(data["output"]);
+      },
       error => { console.log(error);},
-      ()=> console.log("finished.. do something here")// Here call is completed. If you wish to do something 
-      // after call is completed(since this is an asynchronous call), this is the right place to do. ex: call another function
     )
   }
 
   postChordal(adjList) {
    this.service.postChordal(adjList).subscribe(
-     data => { console.log(data)},
+     data => { 
+       console.log(data);
+       this.openDialog(data["output"]);
+      },
      error => { console.log(error);},
-     ()=> console.log("finished.. do something here")// Here call is completed. If you wish to do something 
-     // after call is completed(since this is an asynchronous call), this is the right place to do. ex: call another function
     )
    }
 
-  openDialog() {
-    this.dialog.open(ReconhecimentoDialog);
+  openDialog(dialogType) {
+    switch (dialogType) {
+      case '1':
+        console.log("PertenceCordalDialog");
+        this.dialog.open(PertenceCordalDialog);
+        break;
+      case '2':
+        console.log("NaoPertenceCordalDialog");
+        this.dialog.open(NaoPertenceCordalDialog);
+        break;
+      case '3':
+        console.log("PertenceBlocoDialog");
+        this.dialog.open(PertenceBlocoDialog);
+        break;
+      case '4':
+        console.log("NaoPertenceBlocoDialog");
+        this.dialog.open(NaoPertenceBlocoDialog);
+        break;
+    }
   }
 
   algoritmo = {
@@ -59,8 +131,8 @@ export class AppComponent {
 [1,0,0]
 [1,0,0]`
 
-  listHandler() {
-    var lines = this.lista.replace(/(\r\n|\n|\r)/gm, "end").split("end")
+  listHandler(lista) {
+    var lines = lista.replace(/(\r\n|\n|\r)/gm, "end").split("end")
     var finalList = lines.length + " "
 
     lines.forEach(item => {
@@ -74,16 +146,14 @@ export class AppComponent {
     });
 
     console.log(finalList);
-    
-    // run ./a.out n finalList
-    // vértices começando do zero
+    return finalList;
   }
 
-  matrixHandler() {
+  matrixHandler(matriz) {
     function convertToAdjList(adjMatrix) {
       return adjMatrix.map(a => a.map((v, i) => v ? i : -1).filter(v => v !== -1))
     }
-    var matrix = JSON.parse("[" + this.matriz.replace(/(\r\n|\n|\r)/gm, ", ") + "]");
+    var matrix = JSON.parse("[" + matriz.replace(/(\r\n|\n|\r)/gm, ", ") + "]");
     var adjList = convertToAdjList(matrix);
     
     var finalList = adjList.length + " "
@@ -95,14 +165,54 @@ export class AppComponent {
     }
 
     console.log(finalList);
-    
-    // run ./a.out n finalList
-    // vértices começando do zero
+    return finalList;
+  }
+
+  go(algoritmo, listaInput, matrizInput) {
+    switch (algoritmo) {
+      case '1':
+        console.log("Reconhecimento");
+
+        var finalList: String;
+        switch (this.representationForm.value.default) {
+          case '1':
+            console.log("Lista");
+            finalList = this.listHandler(listaInput.value);
+            break;
+          case '2':
+            console.log("Matriz");
+            finalList = this.matrixHandler(matrizInput.value);
+            break;
+        }
+        
+        switch (this.classForm.value.default) {
+          case '1':
+            console.log("Cordal");
+            this.postChordal(finalList);
+            break;
+          case '2':
+            console.log("Bloco");
+            this.postBlock(finalList);
+            break;
+        }
+
+        break;
+
+      case '2':
+        console.log("Geração");
+
+        switch (this.typeForm.value.default) {
+          case '1':
+            console.log("Estático");
+            this.postStatic(this.options.value.n, listaInput, matrizInput);
+            break;
+          case '2':
+            console.log("Dinâmico");
+            console.log("WIP: Ainda sendo implementado");
+            break;
+        }
+
+        break;
+    }
   }
 }
-
-@Component({
-  selector: 'reconhecimento',
-  templateUrl: 'reconhecimento.html',
-})
-export class ReconhecimentoDialog {}

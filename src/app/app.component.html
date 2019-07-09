@@ -10,14 +10,14 @@
     <mat-button-toggle value="2">Geração</mat-button-toggle>
   </mat-button-toggle-group>
 
-  <div [hidden]="algoritmo.value==2">
-    <mat-radio-group>
+  <div [hidden]="algoritmo.value==2" [formGroup]="classForm">
+    <mat-radio-group formControlName="default">
       <mat-radio-button value="1" style="margin:10px">Cordal</mat-radio-button>
       <mat-radio-button value="2" style="margin-right: 50px">Bloco</mat-radio-button>
     </mat-radio-group>
   </div>
-  <div [hidden]="algoritmo.value==2">
-    <mat-radio-group>
+  <div [hidden]="algoritmo.value==2" [formGroup]="representationForm">
+    <mat-radio-group formControlName="default">
       <mat-radio-button value="1" style="margin:10px">Lista</mat-radio-button>
       <mat-radio-button value="2">Matriz</mat-radio-button>
     </mat-radio-group>
@@ -31,8 +31,8 @@
       </mat-form-field>
     </form>
   </div>
-  <div [hidden]="algoritmo.value==1">
-    <mat-radio-group>
+  <div [hidden]="algoritmo.value==1" [formGroup]="typeForm">
+    <mat-radio-group formControlName="default">
       <mat-radio-button value="1" style="margin:10px">Estático</mat-radio-button>
       <mat-radio-button value="2">Dinâmico</mat-radio-button>
     </mat-radio-group>
@@ -40,15 +40,15 @@
 </div>
 
 <div class="painel">
-  <button mat-raised-button (click)="postStatic(3)">Go</button>
+  <button mat-raised-button (click)="go(algoritmo.value, listaInput, matrizInput)">Go</button>
 </div>
 
 <form class="painel">
   <mat-form-field class="example-full-width" style="margin-left:200px; margin-right:200px">
-    <textarea matInput placeholder="Lista de Adjacência" [value]="lista" matTextareaAutosize></textarea>
+    <textarea matInput #listaInput placeholder="Lista de Adjacência" [value]="lista" matTextareaAutosize></textarea>
   </mat-form-field>
 
   <mat-form-field class="example-full-width" style="margin-left:200px; margin-right:200px">
-    <textarea matInput placeholder="Matriz de Adjacência" [value]="matriz" matTextareaAutosize></textarea>
+    <textarea matInput #matrizInput placeholder="Matriz de Adjacência" [value]="matriz" matTextareaAutosize></textarea>
   </mat-form-field>
 </form>

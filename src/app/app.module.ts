@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { AppComponent, ReconhecimentoDialog } from './app.component';
+import { AppComponent, PertenceCordalDialog, NaoPertenceBlocoDialog, PertenceBlocoDialog, NaoPertenceCordalDialog } from './app.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonToggleModule} from '@angular/material';
@@ -19,7 +19,10 @@ import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     AppComponent,
-    ReconhecimentoDialog
+    PertenceCordalDialog, 
+    NaoPertenceBlocoDialog, 
+    PertenceBlocoDialog, 
+    NaoPertenceCordalDialog
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,10 @@ import { HttpModule } from '@angular/http';
     HttpModule
   ],
   entryComponents: [
-    ReconhecimentoDialog
+    PertenceCordalDialog, 
+    NaoPertenceBlocoDialog, 
+    PertenceBlocoDialog, 
+    NaoPertenceCordalDialog
   ],
   providers: [AppService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
