@@ -11,16 +11,22 @@
   </mat-button-toggle-group>
 
   <div [hidden]="algoritmo.value==2" [formGroup]="classForm">
-    <mat-radio-group formControlName="default">
-      <mat-radio-button value="1" style="margin:10px">Cordal</mat-radio-button>
-      <mat-radio-button value="2" style="margin-right: 50px">Bloco</mat-radio-button>
-    </mat-radio-group>
+    <div layout-align='center center' layout='column'>
+        <div style="margin-left:10px">Classe de grafos</div>
+        <mat-radio-group formControlName="default">
+          <mat-radio-button value="1" style="margin:10px">Cordal</mat-radio-button>
+          <mat-radio-button value="2" style="margin-right: 50px">Bloco</mat-radio-button>
+        </mat-radio-group>
+     </div>
   </div>
   <div [hidden]="algoritmo.value==2" [formGroup]="representationForm">
-    <mat-radio-group formControlName="default">
-      <mat-radio-button value="1" style="margin:10px">Lista</mat-radio-button>
-      <mat-radio-button value="2">Matriz</mat-radio-button>
-    </mat-radio-group>
+    <div layout-align='center center' layout='column'>
+        <div style="margin-left:10px">Tipo de representação</div>
+          <mat-radio-group formControlName="default">
+            <mat-radio-button value="1" style="margin:10px">Lista</mat-radio-button>
+            <mat-radio-button value="2">Matriz</mat-radio-button>
+          </mat-radio-group>    
+     </div>
   </div>
 
   <div [hidden]="algoritmo.value==1">
@@ -32,10 +38,13 @@
     </form>
   </div>
   <div [hidden]="algoritmo.value==1" [formGroup]="typeForm">
-    <mat-radio-group formControlName="default">
-      <mat-radio-button value="1" style="margin:10px">Estático</mat-radio-button>
-      <mat-radio-button value="2">Dinâmico</mat-radio-button>
-    </mat-radio-group>
+    <div layout-align='center center' layout='column'>
+      <div style="margin-left:10px">Tipo de algoritmo</div>
+        <mat-radio-group formControlName="default">
+          <mat-radio-button value="1" style="margin:10px">Estático</mat-radio-button>
+          <mat-radio-button value="2">Dinâmico</mat-radio-button>
+        </mat-radio-group>    
+    </div>
   </div>
 </div>
 
@@ -45,10 +54,21 @@
 
 <form class="painel">
   <mat-form-field class="example-full-width" style="margin-left:200px; margin-right:200px">
-    <textarea matInput #listaInput placeholder="Lista de Adjacência" [value]="lista" matTextareaAutosize></textarea>
-  </mat-form-field>
-
+    <textarea matInput #listaInput placeholder="Lista de Adjacência" matTextareaAutosize></textarea>
+  </mat-form-field>   
+  
   <mat-form-field class="example-full-width" style="margin-left:200px; margin-right:200px">
-    <textarea matInput #matrizInput placeholder="Matriz de Adjacência" [value]="matriz" matTextareaAutosize></textarea>
+    <textarea matInput #matrizInput placeholder="Matriz de Adjacência" matTextareaAutosize></textarea>
+  </mat-form-field>
+</form>
+
+
+<form class="painel">
+  <mat-form-field class="example-full-width" style="margin-left:200px; margin-right:200px">
+    <textarea matInput [disabled]="true" placeholder="Exemplo de Lista de Adjacência" [value]="lista" matTextareaAutosize></textarea>
+  </mat-form-field>   
+  
+  <mat-form-field class="example-full-width" style="margin-left:200px; margin-right:200px">
+    <textarea matInput [disabled]="true" placeholder="Exemplo de Matriz de Adjacência" [value]="matriz" matTextareaAutosize></textarea>
   </mat-form-field>
 </form>
