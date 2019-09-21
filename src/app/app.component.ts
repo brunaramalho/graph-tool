@@ -64,6 +64,21 @@ export class AppComponent {
     })
   }
 
+  postDynamic(n, listaInput, matrizInput) {
+    var matrix = "";
+    var list = ""; 
+    this.service.postDynamic(n).subscribe(
+       data => { 
+          console.log(data);
+          list = data["output"].split("|")[0];
+          matrix = data["output"].split("|")[1];
+          listaInput.value = list
+          matrizInput.value = matrix
+        },
+       error => { console.log(error);},
+     )
+   }
+
   postStatic(n, listaInput, matrizInput) {
     var matrix = "";
     var list = ""; 
@@ -208,7 +223,7 @@ export class AppComponent {
             break;
           case '2':
             console.log("Dinâmico");
-            console.log("WIP: Ainda sendo implementado");
+            this.postDynamic(this.options.value.n, listaInput, matrizInput);
             break;
         }
 
